@@ -10,8 +10,21 @@ http.createServer(function (req, res) {
     const nuevoArchivo = params.nuevoArchivo
     
 //creacion de archivo
-    if (req.url.includes('/crear')) {
-        fs.writeFile(archivo, contenido, (err, data) => {
+   if (req.url.includes('/crear')) {
+        let date = new Date()
+        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let year = date.getFullYear()
+        let newContenido; //para poder añadirle la fecha
+
+        if(month < 10 && day <10 ){
+            newContenido = `0${day}-0${month}-${year} \n${contenido}`
+            }
+            else
+            {
+            newContenido = `${day}-${month}-${year} \n${contenido}`
+            }
+        fs.writeFile(archivo, newContenido, (err, data) => {
             if (err) {
                 res.write('no se pudo crear el archivo')
                 res.end()
