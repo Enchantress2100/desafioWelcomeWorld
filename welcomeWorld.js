@@ -2,7 +2,6 @@
 const http = require('http')
 const url = require('url')
 const fs = require('fs')
-const { setTimeout } = require('timers/promises')
 
 http.createServer(function (req, res) {
     const params = url.parse(req.url, true).query
@@ -64,7 +63,7 @@ http.createServer(function (req, res) {
                 }    
             })   
         }            
-        setInterval(eliminar, 3000);
+        setTimeout(eliminar, 3000);
     }
     console.log(`se está procesando la eliminación del archivo ${nuevoArchivo}`);
 }).listen(8080, () => console.log('servidor arriba y funcionando OK'))
