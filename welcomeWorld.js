@@ -51,6 +51,7 @@ http.createServer(function (req, res) {
     }
 //eliminar el archivo creado
     if (req.url.includes('/eliminar')) {
+        console.log(`se está procesando la eliminación del archivo ${nuevoArchivo}`);
         function eliminar() {
               fs.unlink(nuevoArchivo, (err, data) => {
                 if (err) {
@@ -65,5 +66,4 @@ http.createServer(function (req, res) {
         }            
         setTimeout(eliminar, 3000);
     }
-    console.log(`se está procesando la eliminación del archivo ${nuevoArchivo}`);
 }).listen(8080, () => console.log('servidor arriba y funcionando OK'))
