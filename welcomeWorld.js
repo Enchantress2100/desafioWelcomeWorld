@@ -44,7 +44,7 @@ http.createServer(function (req, res) {
                 res.write('no se pudo renombrar el archivo')
                 res.end()
             } else {
-                res.write(`archivo ${archivo} renombrado con exito como: ${nuevoArchivo}`)
+            res.write(`archivo ${archivo} renombrado con exito como: ${nuevoArchivo}`)
             console.log('archivo renombrado con exito')
             res.end()
             }  
@@ -52,18 +52,19 @@ http.createServer(function (req, res) {
     }
 //eliminar el archivo creado
     if (req.url.includes('/eliminar')) {
-        console.log(`se está procesando la eliminación del archivo ${nuevoArchivo}`)
-        //setTimeout(() => {
-            fs.unlink(nuevoArchivo, (err, data) => {
-            if (err) {
-                res.write('no se pudo borrar el archivo')
-                res.end()
-            } else {
-            res.write(`archivo ${nuevoArchivo} borrado con exito`)
-            console.log('archivo borrado con exito')
-            res.end() 
-            }    
-        })
-        //}, 3000);
-        }      
+        function eliminar() {
+              fs.unlink(nuevoArchivo, (err, data) => {
+                if (err) {
+                    res.write('no se pudo borrar el archivo')
+                    res.end()
+                } else {
+                    res.write(`archivo ${nuevoArchivo} borrado con exito`)
+                    console.log('archivo borrado con exito')
+                    res.end() 
+                }    
+            })   
+        }            
+        setInterval(eliminar, 3000);
+    }
+    console.log(`se está procesando la eliminación del archivo ${nuevoArchivo}`);
 }).listen(8080, () => console.log('servidor arriba y funcionando OK'))
